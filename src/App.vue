@@ -1,9 +1,29 @@
 <template>
   <div id="app">
-    <!-- <GridExamples /> -->
-    <!-- <Masonry /> -->
+    <Grid2>
+      <template slot="heading">
+        <h1>Lean Canvas</h1>
+      </template>
+      <template slot="problem">
+        <Card>
+          <template slot="front">
+            <ul v-if="problems">
+              <li v-for="(item, index) in problems" :key="index">{{ item }}</li>
+            </ul>
+          </template>
+          <template slot="back">
+            <span>Sharing lots of photos and videos is time consuming</span>
+          </template>
+        </Card>
+      </template>
+    </Grid2>
+    <!--
+     <GridExamples />
+     <Masonry /> 
+    -->
+    <!--
     <DashboardGrid />
-
+    -->
     <!--
       <Calendar
         v-model="single.value"
@@ -22,18 +42,27 @@
 </template>
 
 <script>
-import GridExamples from "./components/GridExamples";
-import Masonry from "./components/Masonry";
-import DashboardGrid from "./components/DashboardGrid.vue";
-import Calendar from "vue-datepicker-ui";
+import "@/assets/css/main.css";
+
+// import GridExamples from "./components/GridExamples";
+// import Masonry from "./components/Masonry";
+// import DashboardGrid from "./components/DashboardGrid.vue";
+
+import Grid2 from "./components/Grid2.vue";
+import Card from "./components/Card.vue";
+// import Canvas from "./components/Canvas";
+// import Calendar from "vue-datepicker-ui";
 
 export default {
   name: "App",
   components: {
-    GridExamples,
-    Masonry,
-    DashboardGrid,
-    Calendar
+    Grid2,
+    Card
+    //    GridExamples,
+    //Masonry,
+    //    DashboardGrid,
+    //    Calendar,
+    //    Canvas
   },
   data: function() {
     return {
@@ -45,7 +74,8 @@ export default {
         range: false,
         value: new Date(),
         firstDayOfWeek: "monday"
-      }
+      },
+      problems: ["asda", "sdada"]
     };
   }
 };
@@ -58,6 +88,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  //margin-top: 60px;
+  margin-top: 60px;
+}
+.btn {
+  @apply font-bold py-2 px-4 rounded;
+}
+.btn-blue {
+  @apply bg-blue text-white;
+}
+.btn-blue:hover {
+  @apply bg-blue-dark;
 }
 </style>

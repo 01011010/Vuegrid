@@ -1,11 +1,12 @@
 <template>
   <div
     v-bind:style="{ 'grid-column': colSpan, 'grid-row': rowSpan }"
-    class="item blog"
+    class="item"
     v-bind:class="[named]"
     :position="tilePosition"
   >
-    <slot></slot> {{ this.positionToGridAreaNotation("a1:a6") }}
+    <slot></slot>
+    {{ this.positionToGridAreaNotation(this.position) }}
   </div>
 </template>
 
