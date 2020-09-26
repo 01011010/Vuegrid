@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 /* Lean Canvas grid is 5 col x 3 rows */
 .container {
   display: grid;

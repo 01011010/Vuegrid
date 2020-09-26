@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <Grid2>
+    <QuarterlyPlan>
+      <template slot="heading">
+        <h1>Quarterly Plan</h1>
+      </template>
+    </QuarterlyPlan>
+    <LeanCanvas>
       <template slot="heading">
         <h1>Lean Canvas</h1>
       </template>
@@ -16,7 +21,8 @@
           </template>
         </Card>
       </template>
-    </Grid2>
+    </LeanCanvas>
+
     <!--
      <GridExamples />
      <Masonry /> 
@@ -48,7 +54,8 @@ import "@/assets/css/main.css";
 // import Masonry from "./components/Masonry";
 // import DashboardGrid from "./components/DashboardGrid.vue";
 
-import Grid2 from "./components/Grid2.vue";
+import LeanCanvas from "./components/LeanCanvas.vue";
+import QuarterlyPlan from "./components/QuarterlyPlan.vue";
 import Card from "./components/Card.vue";
 // import Canvas from "./components/Canvas";
 // import Calendar from "vue-datepicker-ui";
@@ -56,7 +63,8 @@ import Card from "./components/Card.vue";
 export default {
   name: "App",
   components: {
-    Grid2,
+    LeanCanvas,
+    QuarterlyPlan,
     Card
     //    GridExamples,
     //Masonry,
