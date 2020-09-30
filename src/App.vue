@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <tree-menu :label="tree.label" :nodes="tree.nodes" :depth="0"></tree-menu>
+
     <QuarterlyPlan>
       <template slot="heading">
         <h1>Quarterly Plan</h1>
@@ -57,22 +59,51 @@ import "@/assets/css/main.css";
 import LeanCanvas from "./components/LeanCanvas.vue";
 import QuarterlyPlan from "./components/QuarterlyPlan.vue";
 import Card from "./components/Card.vue";
+import TreeMenu from "./components/TreeMenu.vue";
+// import ScopeMap from "./components/ScopeMap.vue";
+
 // import Canvas from "./components/Canvas";
 // import Calendar from "vue-datepicker-ui";
+let tree = {
+  label: "root",
+  nodes: [
+    {
+      label: "item1",
+      nodes: [
+        {
+          label: "item1.1",
+        },
+        {
+          label: "item1.2",
+          nodes: [
+            {
+              label: "item1.2.1",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "item2",
+    },
+  ],
+};
 
 export default {
   name: "App",
   components: {
     LeanCanvas,
     QuarterlyPlan,
-    Card
+    Card,
+    TreeMenu,
+    // ScopeMap,
     //    GridExamples,
     //Masonry,
     //    DashboardGrid,
     //    Calendar,
     //    Canvas
   },
-  data: function() {
+  data: function () {
     return {
       single: {
         title: "Single",
@@ -81,11 +112,12 @@ export default {
         position: "bottom",
         range: false,
         value: new Date(),
-        firstDayOfWeek: "monday"
+        firstDayOfWeek: "monday",
       },
-      problems: ["asda", "sdada"]
+      problems: ["asda", "sdada"],
+      tree,
     };
-  }
+  },
 };
 </script>
 
@@ -94,7 +126,7 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /*  text-align: center;*/
   color: #2c3e50;
   margin-top: 60px;
 }
