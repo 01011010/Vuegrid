@@ -2,6 +2,14 @@
   <div id="app">
     <tree-menu :label="tree.label" :nodes="tree.nodes" :depth="0"></tree-menu>
 
+    <item-template
+      class="item"
+      :item="treeData"
+      @make-folder="makeFolder"
+      @add-item="addItem"
+      @delete-item="deleteItem"
+    ></item-template>
+
     <QuarterlyPlan>
       <template slot="heading">
         <h1>Quarterly Plan</h1>
@@ -60,6 +68,7 @@ import LeanCanvas from "./components/LeanCanvas.vue";
 import QuarterlyPlan from "./components/QuarterlyPlan.vue";
 import Card from "./components/Card.vue";
 import TreeMenu from "./components/TreeMenu.vue";
+import ItemTemplate from "./components/ItemTemplate.vue";
 // import ScopeMap from "./components/ScopeMap.vue";
 
 // import Canvas from "./components/Canvas";
@@ -89,6 +98,28 @@ let tree = {
   ],
 };
 
+let treeData = {
+  name: "My Tree",
+  children: [
+    { name: "hello" },
+    { name: "wat" },
+    {
+      name: "child folder",
+      children: [
+        {
+          name: "child folder",
+          children: [{ name: "hello" }, { name: "wat" }],
+        },
+        { name: "hello" },
+        { name: "wat" },
+        {
+          name: "child folder",
+          children: [{ name: "hello" }, { name: "wat" }],
+        },
+      ],
+    },
+  ],
+};
 export default {
   name: "App",
   components: {
@@ -96,6 +127,7 @@ export default {
     QuarterlyPlan,
     Card,
     TreeMenu,
+    ItemTemplate,
     // ScopeMap,
     //    GridExamples,
     //Masonry,
@@ -116,7 +148,28 @@ export default {
       },
       problems: ["asda", "sdada"],
       tree,
+      treeData,
     };
+  },
+  methods: {
+    makeFolder: function (item) {
+      console.log("make folder");
+      // https://stackoverflow.com/questions/36671106/what-is-the-difference-between-vm-set-and-vue-set
+      this.$set(item, "children", []);
+      this.addItem(item);
+      console.log(treeData);
+    },
+    addItem: function (item) {
+      console.log("add item");
+      item.children.push({
+        name: "new stuff",
+      });
+      console.log(treeData);
+    },
+    deleteItem: function (item) {
+      console.log("delete the item");
+      this.$delete(treeData, item);
+    },
   },
 };
 </script>

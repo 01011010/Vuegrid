@@ -1,5 +1,29 @@
+<template>
+  <div>
+    <li>
+      <div :class="{ bold: isFolder }" @click="toggle" @dblclick="makeFolder">
+        {{ item.name }}
+        <span v-if="isFolder">[{{ isOpen ? "-" : "+" }}]</span>
+      </div>
+
+      <ul v-show="isOpen" v-if="isFolder">
+        <item-template
+          class="item"
+          v-for="(child, index) in item.children"
+          :key="index"
+          :item="child"
+          @make-folder="$emit('make-folder', $event)"
+          @add-item="$emit('add-item', $event)"
+          @delete-item="$emit('delete-item', $event)"
+        ></item-template>
+        <li class="add" @click="$emit('add-item', item)">+</li>
+      </ul>
+    </li>
+  </div>
+</template>
 <script>
 export default {
+  name: "item-template",
   props: {
     item: Object,
   },
@@ -18,6 +42,8 @@ export default {
       if (this.isFolder) {
         this.isOpen = !this.isOpen;
       }
+      console.log(this.item);
+      this.$emit("delete-item", this.item);
     },
     makeFolder: function () {
       if (!this.isFolder) {
@@ -25,6 +51,26 @@ export default {
         this.isOpen = true;
       }
     },
+    removeItem: function () {
+      console.log(this);
+    },
   },
 };
 </script>
+<style lang="css" scoped>
+body {
+  font-family: Menlo, Consolas, monospace;
+  color: #444;
+}
+.item {
+  cursor: pointer;
+}
+.bold {
+  font-weight: bold;
+}
+ul {
+  padding-left: 1em;
+  line-height: 1.5em;
+  list-style-type: dot;
+}
+</style>
